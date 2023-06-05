@@ -58,11 +58,6 @@ contract BasicIssuanceModule is ModuleBase, ReentrancyGuard {
         address indexed _to,
         uint256 _quantity
     );
-    event RequiredComponentUnitsForIssueGiven(
-        address indexed _setToken,
-        address[] _components,
-        uint256[] _notionalUnits
-    );
 
     /* ============ State Variables ============ */
 
@@ -223,8 +218,6 @@ contract BasicIssuanceModule is ModuleBase, ReentrancyGuard {
 
             notionalUnits[i] = _setToken.getDefaultPositionRealUnit(components[i]).toUint256().preciseMulCeil(_quantity);
         }
-
-        emit RequiredComponentUnitsForIssueGiven(components, notionalUnits);
 
         return (components, notionalUnits);
     }
